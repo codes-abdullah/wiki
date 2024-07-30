@@ -6,11 +6,11 @@
     
     <div>
       <label  for="title" class="form-label">Title</label>
-      <input name="title" required type="text" class="form-control" id="title" placeholder="EDX">
+      <input value="{{title}}" name="title" required type="text" class="form-control" id="title" placeholder="EDX">
     </div>
     <div>
-      <label for="content" style='width: 500px;'>Content (You can use Markdown)</label>
-      <textarea style='width: 500px;' name="content" required class="form-control" id="content"  rows="10" placeholder="We love edx.org..."></textarea>
+      <label for="content" style='width: 500px;'>Content</label>
+      <textarea value="{{content}}" style='width: 500px;' name="content" required class="form-control" id="content"  rows="10" placeholder="We love edx.org..."></textarea>
     </div>
     
       <button type="submit" class="btn btn-primary">Add</button>

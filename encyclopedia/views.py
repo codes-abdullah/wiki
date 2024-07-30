@@ -16,5 +16,10 @@ def goto_entry(request, title):
     html = markdown.markdown(entry_text, extras=['fenced-code-blocks'])
     return render(request, 'encyclopedia/entry.html', {'entry_text':html})
 
-def create_entry(request):
+def create_entry(request):    
+    if request.method == 'POST':
+        return HttpResponse(str(request.headers))
+        # title = request.headers['title']
+        # content = request.headers['content']
+        # return render(request, 'encyclopedia/create.html', {title:title, 'content':content})
     return render(request, 'encyclopedia/create.html')
