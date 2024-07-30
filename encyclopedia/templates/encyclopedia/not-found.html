@@ -1,0 +1,7 @@
+{%extends 'encyclopedia/layout.html'%}
+
+{% block body %}
+<h3 style="color:red;">The requested entry was not found</h3>
+<h5>Could not find the entry "{{entry}}", it's not exists yet !!</h5>
+<a href="{% url 'wiki:index' %}">Go Home</a>
+{%endblock body%}

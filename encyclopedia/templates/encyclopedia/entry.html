@@ -1,6 +1,6 @@
 {% extends "encyclopedia/layout.html" %}
 
 {% block body %}
-    {{entry_text}}
+    {{entry_text | safe}}
 {% endblock body %}
 
