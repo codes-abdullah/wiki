@@ -6,14 +6,17 @@
     
     <div>
       <label  for="title" class="form-label">Title</label>
-      <input value="{{title}}" name="title" required type="text" class="form-control" id="title" placeholder="EDX">
+      <input value="{{title}}" name="title" required type="text" class="form-control">
     </div>
     <div>
       <label for="content" style='width: 500px;'>Content</label>
-      <textarea value="{{content}}" style='width: 500px;' name="content" required class="form-control" id="content"  rows="10" placeholder="We love edx.org..."></textarea>
+      <textarea style='width: 500px;' name="content" required class="form-control"  rows="5">{{content}}</textarea>
     </div>
-    
+      <input type="hidden" name="edit" value="{{edit}}">
       <button type="submit" class="btn btn-primary">Add</button>
       <a class="btn btn-danger" href="/">Cancel and discard</a>
     </form>
+    <h4 style='color:blue;'>{{status}}</h4>
+    <h4 style='color:red;'>{{error}}</h4>
+    
 {%endblock body%}

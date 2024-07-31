@@ -1,7 +1,9 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from . import util
-import markdown
+import markdown, markdownify 
+
+
 from django import forms
 
 def index(request):
@@ -14,12 +16,23 @@ def goto_entry(request, title):
     if entry_text == None:
         return render(request, 'encyclopedia/not-found.html', {'entry':title});
     html = markdown.markdown(entry_text, extras=['fenced-code-blocks'])
-    return render(request, 'encyclopedia/entry.html', {'entry_text':html})
+    return render(request, 'encyclopedia/entry.html', {'title':title,'content':html})
 
 def create_entry(request):    
-    if request.method == 'POST':
-        return HttpResponse(str(request.headers))
-        # title = request.headers['title']
-        # content = request.headers['content']
-        # return render(request, 'encyclopedia/create.html', {title:title, 'content':content})
-    return render(request, 'encyclopedia/create.html')
+    if request.method == 'GET':
+        return render(request, 'encyclopedia/create.html')
+    
+    title = request.POST.get('title')
+    content = request.POST.get('content')
+    if request.POST.get('edit') != None:
+        return render(request, 'encyclopedia/create.html', {'title':title, 
+        'content':markdownify.markdownify(content), 'edit':True})
+    result = {'title':title, 
+        'content':content, 
+        'error':f'{title} already exists'}
+    if util.get_entry(title) == None:
+        util.save_entry(title, content)
+        result = {'title':'', 
+        'content':'', 
+        'status':f'{title} created successfully'}
+    return render(request, 'encyclopedia/create.html', result)
